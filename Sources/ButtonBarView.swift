@@ -1,5 +1,5 @@
 //  ButtonBarView.swift
-//  大鹏哥修改版
+//  大鹏哥倾心修改版
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
 //  Copyright (c) 2017 Xmartlabs ( http://xmartlabs.com )
@@ -47,7 +47,7 @@ public enum SelectedBarVerticalAlignment {
 open class ButtonBarView: UICollectionView {
 
     open lazy var selectedBar: UIView = { [unowned self] in
-        let bar  = UIView(frame: CGRect(x: 0, y: self.frame.size.height - CGFloat(self.selectedBarHeight), width: 0, height: CGFloat(self.selectedBarHeight)))
+        let bar  = UIView(frame: CGRect(x: 0, y: self.frame.size.height - CGFloat(self.selectedBarHeight)-10, width: 0, height: CGFloat(self.selectedBarHeight)))
         bar.layer.zPosition = 9999
         return bar
     }()
@@ -116,16 +116,16 @@ open class ButtonBarView: UICollectionView {
 
     open func updateSelectedBarPosition(_ animated: Bool, swipeDirection: SwipeDirection, pagerScroll: PagerScroll) {
         var selectedBarFrame = selectedBar.frame
-
+        
         let selectedCellIndexPath = IndexPath(item: selectedIndex, section: 0)
         let attributes = layoutAttributesForItem(at: selectedCellIndexPath)
         let selectedCellFrame = attributes!.frame
 
         updateContentOffset(animated: animated, pagerScroll: pagerScroll, toFrame: selectedCellFrame, toIndex: (selectedCellIndexPath as NSIndexPath).row)
 
-        selectedBarFrame.size.width = selectedCellFrame.size.width
-        selectedBarFrame.origin.x = selectedCellFrame.origin.x
-
+        selectedBarFrame.size.width = 18.0
+        selectedBarFrame.origin.x = (selectedCellFrame.size.width - 18.0)/2+selectedCellFrame.origin.x
+        selectedBarFrame.origin.y = selectedCellFrame.height - 10 - 2
         if animated {
             UIView.animate(withDuration: 0.3, animations: { [weak self] in
                 self?.selectedBar.frame = selectedBarFrame
@@ -178,7 +178,7 @@ open class ButtonBarView: UICollectionView {
         case .middle:
             selectedBarFrame.origin.y = (frame.size.height - selectedBarHeight) / 2
         case .bottom:
-            selectedBarFrame.origin.y = frame.size.height - selectedBarHeight
+            selectedBarFrame.origin.y = frame.size.height - selectedBarHeight-10
         }
 
         selectedBarFrame.size.height = selectedBarHeight
