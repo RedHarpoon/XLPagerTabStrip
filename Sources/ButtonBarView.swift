@@ -1,5 +1,5 @@
 //  ButtonBarView.swift
-//  大鹏哥倾心修改版
+//  大鹏哥倾心修改版1.1
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
 //  Copyright (c) 2017 Xmartlabs ( http://xmartlabs.com )
@@ -101,7 +101,7 @@ open class ButtonBarView: UICollectionView {
         targetFrame.size.width += (toFrame.size.width - fromFrame.size.width) * progressPercentage
         targetFrame.origin.x += (toFrame.origin.x - fromFrame.origin.x) * progressPercentage
 
-        selectedBar.frame = CGRect(x: targetFrame.origin.x, y: selectedBar.frame.origin.y, width: targetFrame.size.width, height: selectedBar.frame.size.height)
+        selectedBar.frame = CGRect(x: targetFrame.origin.x+(targetFrame.size.width-18)/2, y: selectedBar.frame.origin.y, width: 18, height: selectedBar.frame.size.height)
 
         var targetContentOffset: CGFloat = 0.0
         if contentSize.width > frame.size.width {
@@ -122,7 +122,7 @@ open class ButtonBarView: UICollectionView {
         let selectedCellFrame = attributes!.frame
 
         updateContentOffset(animated: animated, pagerScroll: pagerScroll, toFrame: selectedCellFrame, toIndex: (selectedCellIndexPath as NSIndexPath).row)
-
+        
         selectedBarFrame.size.width = 18.0
         selectedBarFrame.size.height = selectedBarHeight
         selectedBarFrame.origin.x = (selectedCellFrame.size.width - 18.0)/2+selectedCellFrame.origin.x
